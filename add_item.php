@@ -77,55 +77,66 @@ if (isset($_POST['submit'])) {
     <title>Tambah Item</title>
 </head>
 <body>
-    <h2>Tambah Item</h2>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="background-color: #e3e3e3; padding: 20px; border-radius: 10px; width: 50%;">
+            <h2 style="text-align: center;">Tambah Item</h2>
 
-    <?php if (!empty($error)): ?>
-        <div style="color: red;">
-            <?php echo $error; ?>
-        </div><br>
-    <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <div style="color: red; text-align: center;">
+                    <?php echo $error; ?>
+                </div><br>
+            <?php endif; ?>
 
-    <form method="POST" action="add_item.php" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td>
-                    <label for="customer_name">Nama Customer</label><br>
-                    <input type="text" id="customer_name" name="customer_name" placeholder="Customer Name" required value="<?php echo isset($customer_name) ? $customer_name : ''; ?>"><br><br>
-                </td>
-                <td style="padding-left: 20px;">
-                    <label for="num_files">Jumlah File</label><br>
-                    <input type="number" id="num_files" name="num_files" required min="0" value="<?php echo isset($num_files) ? $num_files : ''; ?>"><br><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="phone_number">Nomor HP</label><br>
-                    <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required value="<?php echo isset($phone_number) ? $phone_number : ''; ?>"><br><br>
-                </td>
-                <td style="padding-left: 20px;">
-                    <label for="num_print">Jumlah Cetak</label><br>
-                    <input type="number" id="num_print" name="num_print" required min="0" value="<?php echo isset($num_print) ? $num_print : ''; ?>"><br><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="photo_date">Tanggal Foto</label><br>
-                    <input type="date" id="photo_date" name="photo_date" required value="<?php echo isset($photo_date) ? $photo_date : ''; ?>"><br><br>
-                </td>
-                <td style="padding-left: 20px;">
-                    <label for="price">Harga</label><br>
-                    <input type="number" id="price" name="price" required min="0" value="<?php echo isset($price) ? $price : ''; ?>"><br><br>
-                </td>
-            </tr>
-        </table>
-        
-        <label for="image">Upload Foto (maks. 10 foto)</label><br>
-        <input type="file" id="image" name="image[]" multiple required><br><br>
-        
-        <button type="submit" name="submit">Simpan</button>
-    </form>
+            <form method="POST" action="add_item.php" enctype="multipart/form-data">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <label for="customer_name">Nama Customer</label><br>
+                            <input type="text" id="customer_name" name="customer_name" placeholder="Customer Name" required value="<?php echo isset($customer_name) ? $customer_name : ''; ?>"><br><br>
+                        </td>
+                        <td style="padding-left: 20px;">
+                            <label for="num_files">Jumlah File</label><br>
+                            <input type="number" id="num_files" name="num_files" required min="0" value="<?php echo isset($num_files) ? $num_files : ''; ?>"><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="phone_number">Nomor HP</label><br>
+                            <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required value="<?php echo isset($phone_number) ? $phone_number : ''; ?>"><br><br>
+                        </td>
+                        <td style="padding-left: 20px;">
+                            <label for="num_print">Jumlah Cetak</label><br>
+                            <input type="number" id="num_print" name="num_print" required min="0" value="<?php echo isset($num_print) ? $num_print : ''; ?>"><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="photo_date">Tanggal Foto</label><br>
+                            <input type="date" id="photo_date" name="photo_date" required value="<?php echo isset($photo_date) ? $photo_date : ''; ?>"><br><br>
+                        </td>
+                        <td style="padding-left: 20px;">
+                            <label for="price">Harga</label><br>
+                            <input type="number" id="price" name="price" required min="0" value="<?php echo isset($price) ? $price : ''; ?>"><br><br>
+                        </td>
+                    </tr>
+                </table>
+                <br>
 
-    <br>
-    <a href="home.php">Kembali ke Home</a>
+                <div style="text-align: center;">
+                    <label for="image">Upload Foto (maks. 10 foto)</label><br>
+                    <input type="file" id="image" name="image[]" multiple required style="margin-left: 70px;"><br><br>
+                </div>
+                <br>
+
+                <div style="text-align: center;">
+                    <a href="home.php" style="text-decoration: none;">
+                            <button type="button">Kembali ke Home</button>
+                        </a>
+                    <button type="submit" name="submit">Simpan</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </body>
 </html>

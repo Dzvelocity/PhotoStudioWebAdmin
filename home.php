@@ -39,7 +39,7 @@ $result = $conn->query("SELECT * FROM items");
                 <th>Nama Customer</th>
                 <th>Nomor HP</th>
                 <th>Tanggal Foto</th>
-                <th>Gambar</th>
+                <th>Foto</th>
                 <th>Jumlah File</th>
                 <th>Jumlah Cetak</th>
                 <th>Harga</th>
@@ -54,15 +54,9 @@ $result = $conn->query("SELECT * FROM items");
                         <td><?php echo $item['phone_number']; ?></td>
                         <td><?php echo $item['photo_date']; ?></td>
                         <td>
-                            <?php 
-                            $images = explode(',', $item['image']); 
-                            if (!empty($images[0])): 
-                            ?>
-                                <img src="<?php echo $images[0]; ?>" width="100"><br>
-                                <?php if (count($images) > 1): ?>
-                                    <a href="detail_item.php?id=<?php echo $item['id']; ?>" style="text-decoration: none;">see more</a>
-                                <?php endif; ?>
-                            <?php endif; ?>
+                            <button type="button" onclick="window.location.href='view_image.php?id=<?php echo $item['id']; ?>'">
+                                Lihat Foto
+                            </button>
                         </td>
                         <td><?php echo $item['num_files']; ?></td>
                         <td><?php echo $item['num_print']; ?></td>
