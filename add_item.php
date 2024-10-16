@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
                     <tr>
                         <td>
                             <label for="customer_name">Nama Customer</label><br>
-                            <input type="text" id="customer_name" name="customer_name" placeholder="Customer Name" required value="<?php echo isset($customer_name) ? $customer_name : ''; ?>"><br><br>
+                            <input type="text" id="customer_name" name="customer_name" required value="<?php echo isset($customer_name) ? $customer_name : ''; ?>"><br><br>
                         </td>
                         <td style="padding-left: 20px;">
                             <label for="num_files">Jumlah File</label><br>
@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
                     <tr>
                         <td>
                             <label for="phone_number">Nomor HP</label><br>
-                            <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" required value="<?php echo isset($phone_number) ? $phone_number : ''; ?>"><br><br>
+                            <input type="text" id="phone_number" name="phone_number" required value="<?php echo isset($phone_number) ? $phone_number : ''; ?>"><br><br>
                         </td>
                         <td style="padding-left: 20px;">
                             <label for="num_print">Jumlah Cetak</label><br>
