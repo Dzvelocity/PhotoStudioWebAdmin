@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
             $error = "Invalid login credentials.";
         }
     } else {
-        $error = "User not found.";
+        $error = "User atau pass salah.";
     }
 }
 ?>
