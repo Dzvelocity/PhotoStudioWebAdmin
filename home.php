@@ -54,8 +54,13 @@ $result = $conn->query("SELECT * FROM items");
                         <td><?php echo $item['phone_number']; ?></td>
                         <td><?php echo $item['photo_date']; ?></td>
                         <td>
+                            <?php 
+                            $images = explode(',', $item['image']); 
+                            if (!empty($images[0])): ?>
+                                <img src="<?php echo $images[0]; ?>" width="100" height="100" style="object-fit: cover;"><br>
+                            <?php endif; ?>
                             <button type="button" onclick="window.location.href='view_image.php?id=<?php echo $item['id']; ?>'">
-                                Lihat Foto
+                                Lihat Lainnya
                             </button>
                         </td>
                         <td><?php echo $item['num_files']; ?></td>
