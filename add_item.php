@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $images = $_FILES['image'];
         $imageCount = count($images['name']);
 
-        if ($imageCount > 10) {
+        if ($imageCount > 15) {
             $error .= "Hanya dapat mengunggah maksimal 10 foto.<br>";
         } elseif ($imageCount > 0) {
             $imageNames = [];
