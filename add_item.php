@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $price = (float)$_POST['price'];
 
     if (!is_numeric($phone_number) || $phone_number < 0) {
-        $error .= "Nomor telepon tidak sesuai.<br>";
+        $error .= "Nomor HP tidak sesuai.<br>";
     }
 
     if (!is_numeric($price) || $price < 0) {

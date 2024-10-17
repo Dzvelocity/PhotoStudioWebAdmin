@@ -32,7 +32,7 @@ if (isset($_POST['edit'])) {
     $price = $_POST['price']; 
 
     if (!is_numeric($phoneNumber) || $phoneNumber < 0) {
-        $error .= "Nomor telepon tidak sesuai.<br>";
+        $error .= "Nomor HP tidak sesuai.<br>";
     }
 
     if (!is_numeric($price) || $price < 0) {
