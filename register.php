@@ -16,16 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        $insertQuery = "INSERT INTO users (username, password) VALUES (?, ?)";
-        $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("ss", $username, $hashed_password);
-        $stmt->execute();
-
+        $insertQuery = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
+        $conn->query($insertQuery);
+    
         header("Location: login.php");
         exit();
     } else {
         $message = "Akun sudah pernah terdaftar!";
-    }
+    }    
 }
 ?>
 
