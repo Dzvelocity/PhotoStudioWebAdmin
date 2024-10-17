@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
-            header('Location: home.php'); 
+            header('Location: home.php');
             exit();
         } else {
             $error = "Invalid login credentials.";
@@ -34,21 +34,23 @@ if (isset($_POST['login'])) {
     <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="background-color: #f3f3f3; padding: 20px; border-radius: 10px;">
+            <h2 style="text-align: center;">Login</h2>
 
-    <?php if (isset($error)): ?>
-        <p style="color: red;"><?php echo $error; ?></p> 
-    <?php endif; ?>
+            <?php if (isset($error)): ?>
+                <p style="color: red; text-align: center;"><?php echo $error; ?></p>
+            <?php endif; ?>
 
-    <form method="POST" action="">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br><br>
-        
-        <input type="submit" name="login" value="Login">
-    </form>
-    <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+            <form method="POST" action="">
+                <div style="text-align: center;">
+                    <input type="text" name="username" placeholder="Username" required><br><br>
+                    <input type="password" name="password" placeholder="Password" required><br><br>
+                    <input type="submit" name="login" value="Login">
+                </div>
+            </form>
+            <p style="text-align: center;">Don't have an account? <a href="register.php">Register here</a>.</p>
+        </div>
+    </div>
 </body>
 </html>

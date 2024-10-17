@@ -1,6 +1,6 @@
 <?php
-session_start(); 
-require 'db.php'; 
+session_start();
+require 'db.php';
 
 $message = "";
 
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: login.php");
         exit();
     } else {
-        $message = "Akun sudah pernah terdaftar!"; 
+        $message = "Akun sudah pernah terdaftar!";
     }
 }
 ?>
@@ -37,21 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Register</title>
 </head>
 <body>
-    <h2>Register</h2>
-    
-    <?php if ($message): ?>
-        <p style="color: red;"><?php echo $message; ?></p> 
-    <?php endif; ?>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="background-color: #f3f3f3; padding: 20px; border-radius: 10px;">
+            <h2 style="text-align: center;">Register</h2>
 
-    <form method="POST" action="">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br><br>
-        
-        <input type="submit" value="Register">
-    </form>
-    <p>Already have an account? <a href="login.php">Login here</a></p>
+            <?php if ($message): ?>
+                <p style="color: red; text-align: center;"><?php echo $message; ?></p> 
+            <?php endif; ?>
+
+            <form method="POST" action="">
+                <div style="text-align: center;">
+                    <input type="text" name="username" placeholder="Username" required><br><br>
+                    <input type="password" name="password" placeholder="Password" required><br><br>
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+            <p style="text-align: center;">Already have an account? <a href="login.php">Login here</a>.</p>
+        </div>
+    </div>
 </body>
 </html>
