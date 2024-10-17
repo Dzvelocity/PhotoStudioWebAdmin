@@ -10,7 +10,7 @@ if (!$item) {
     exit();
 }
 
-$images = explode(',', $item['image']);
+$images = explode(',', $item['image']); 
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +24,14 @@ $images = explode(',', $item['image']);
     <table width="100%" height="100%">
         <tr>
             <td align="center" valign="middle">
-                <?php foreach ($images as $img): ?>
-                    <img src="<?php echo $img; ?>" width="500"><br><br>
-                <?php endforeach; ?>
+                <?php 
+                $i = 0;
+                while ($i < count($images)): ?>
+                    <img src="<?php echo $images[$i]; ?>" width="500"><br><br>
+                <?php 
+                    $i++; 
+                endwhile; 
+                ?>
                 <a href="home.php">Kembali ke Home</a>
             </td>
         </tr>
