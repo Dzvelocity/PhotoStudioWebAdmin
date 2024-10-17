@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         $imageCount = count($images['name']);
 
         if ($imageCount > 15) {
-            $error .= "Hanya dapat mengunggah maksimal 10 foto.<br>";
+            $error .= "Hanya dapat mengunggah maksimal 15 foto.<br>";
         } elseif ($imageCount > 0) {
             $imageNames = [];
             $targetDir = "uploads/";
