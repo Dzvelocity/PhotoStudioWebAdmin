@@ -2,6 +2,11 @@
 session_start();
 require 'db.php';
 
+if (isset($_SESSION['username'])) {
+    header('Location: home.php'); 
+    exit();
+}
+
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,9 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        $insertQuery = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
-        $conn->query($insertQuery);
-    
+        $insertQuery = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $insertStmt = $conn->prepare($insertQuery);
+        $insertStmt->bind_param("ss", $username, $hashed_password);
+        $insertStmt->execute();
+        
         header("Location: login.php");
         exit();
     } else {

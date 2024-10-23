@@ -1,6 +1,11 @@
 <?php
 session_start();
-session_destroy();
-header('Location: index.php');
-exit();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_destroy();
+    header('Location: index.php');
+    exit();
+} else {
+    header('Location: home.php');
+    exit();
+}
 ?>

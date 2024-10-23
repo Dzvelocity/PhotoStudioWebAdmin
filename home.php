@@ -25,7 +25,9 @@ $result = $conn->query("SELECT * FROM items");
                 </td>
                 <td style="text-align: right;">
                     <a href="add_item.php">Tambah Item</a> | 
-                    <a href="logout.php" style="color: red;">Logout</a>
+                    <form method="POST" action="logout.php" style="display: inline;">
+                        <input type="submit" value="Logout" style="color: red; border: none; cursor: pointer;">
+                    </form>
                 </td>
             </tr>
         </table>

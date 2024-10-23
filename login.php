@@ -2,6 +2,11 @@
 session_start();
 require 'db.php';
 
+if (isset($_SESSION['username'])) {
+    header('Location: home.php');
+    exit();
+}
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -25,7 +30,6 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
