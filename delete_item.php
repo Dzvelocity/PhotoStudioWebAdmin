@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Item</title>
+    <title>Deletse Item</title>
 </head>
 <body>
     <h2>Delete Item</h2>

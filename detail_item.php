@@ -1,6 +1,11 @@
 <?php
 require 'db.php';
 
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+
 $id = $_GET['id'];
 $result = $conn->query("SELECT * FROM items WHERE id = $id");
 $item = $result->fetch_assoc();
