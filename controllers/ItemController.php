@@ -8,7 +8,6 @@ class ItemController {
             exit();
         }
     
-        // Pastikan user_id tersedia
         if (!isset($_SESSION['user_id'])) {
             header('Location: index.php?page=user&action=login');
             exit();
@@ -17,7 +16,6 @@ class ItemController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $item = new Item();
             
-            // Proses upload gambar
             $uploadedImages = [];
             if (!empty($_FILES['image']['name'][0])) {
                 $uploadDir = 'uploads/';
@@ -48,7 +46,6 @@ class ItemController {
                 'price' => $_POST['price']
             ];
     
-            // Tambahkan user_id dari session
             if ($item->addItem($data, $_SESSION['user_id'])) {
                 header('Location: index.php?page=home');
                 exit();
@@ -69,7 +66,6 @@ class ItemController {
         $item = new Item();
         $id = $_GET['id'] ?? null;
     
-        // Gunakan user_id dari session
         $itemData = $item->getItemById($id, $_SESSION['user_id']);
     
         if (!$itemData) {
@@ -78,7 +74,6 @@ class ItemController {
         }
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Siapkan data untuk diupdate
             $data = [
                 'id' => $id,
                 'customer_name' => $_POST['customer_name'],
@@ -89,7 +84,6 @@ class ItemController {
                 'price' => $_POST['price']
             ];
     
-            // Tambahkan debugging
             error_log("Updating item: " . print_r($data, true));
             error_log("Files: " . print_r($_FILES, true));
     
@@ -113,7 +107,6 @@ class ItemController {
         $item = new Item();
         $id = $_GET['id'] ?? null;
     
-        // Gunakan user_id dari session
         $itemData = $item->getItemById($id, $_SESSION['user_id']);
     
         if (!$itemData) {
@@ -121,7 +114,6 @@ class ItemController {
             exit();
         }
     
-        // Pastikan images selalu array, bahkan jika kosong
         $images = !empty($itemData['image']) ? 
                   array_map(function($img) { 
                       return 'uploads/' . trim($img); 
@@ -132,13 +124,11 @@ class ItemController {
     }
     
     public function delete() {
-        // Pastikan user sudah login
         if (!isset($_SESSION['user_id'])) {
             header('Location: index.php?page=user&action=login');
             exit();
         }
     
-        // Periksa apakah ID item diberikan
         if (!isset($_GET['id'])) {
             header('Location: index.php?page=home&error=invalid_item');
             exit();
@@ -147,7 +137,6 @@ class ItemController {
         $id = $_GET['id'];
         $item = new Item();
     
-        // Ambil data item untuk pengecekan
         $itemData = $item->getItemById($id, $_SESSION['user_id']);
     
         if (!$itemData) {
@@ -156,10 +145,8 @@ class ItemController {
         }
     
         try {
-            // Ambil daftar gambar
             $images = $item->getItemImages($id);
     
-            // Hapus file gambar terkait jika ada
             if (!empty($images)) {
                 foreach ($images as $imageName) {
                     $imagePath = 'uploads/' . trim($imageName);
@@ -169,7 +156,6 @@ class ItemController {
                 }
             }
     
-            // Hapus item dari database - PERHATIKAN PERUBAHAN DI SINI
             $deleteResult = $item->deleteItem($id, $_SESSION['user_id']);
             
             if ($deleteResult) {
@@ -194,7 +180,6 @@ class ItemController {
         $item = new Item();
         $id = $_GET['id'] ?? null;
     
-        // Gunakan user_id dari session
         $itemData = $item->getItemById($id, $_SESSION['user_id']);
     
         if (!$itemData) {
@@ -202,7 +187,6 @@ class ItemController {
             exit();
         }
     
-        // Pastikan images selalu array, bahkan jika kosong
         $images = !empty($itemData['image']) ? 
                   array_map(function($img) { 
                       return 'uploads/' . trim($img); 

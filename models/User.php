@@ -15,7 +15,7 @@ class User {
         $result = $stmt->get_result()->fetch_assoc();
     
         if ($result && password_verify($password, $result['password'])) {
-            return $result['id']; // Kembalikan ID user
+            return $result['id'];
         }
         return false;
     }
@@ -50,7 +50,6 @@ class User {
             $query = "INSERT INTO users (username, password) VALUES (?, ?)";
             $stmt = $this->db->prepare($query);
             
-            // Hash password
             $hashedPassword = password_hash($userData['password'], PASSWORD_DEFAULT);
     
             $stmt->bind_param("ss", 
@@ -63,7 +62,6 @@ class User {
     
             return $result;
         } catch (Exception $e) {
-            // Log error
             error_log("Registrasi error: " . $e->getMessage());
             return false;
         }

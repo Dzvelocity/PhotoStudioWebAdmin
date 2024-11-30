@@ -4,7 +4,6 @@ require_once 'models/User.php';
 class UserController {
     private $user;
 
-    // Konstruktor untuk menginisialisasi model User
     public function __construct() {
         $this->user = new User();
     }
@@ -26,7 +25,7 @@ class UserController {
             $user_id = $this->user->authenticate($username, $password);
             if ($user_id) {
                 $_SESSION['username'] = $username;
-                $_SESSION['user_id'] = $user_id; // Tambahkan baris ini
+                $_SESSION['user_id'] = $user_id; 
                 header('Location: index.php?page=home');
                 exit();
             } else {
@@ -39,7 +38,6 @@ class UserController {
     private function validateRegistrationData($data) {
         $errors = [];
     
-        // Validasi username
         if (empty($data['username'])) {
             $errors[] = "Username harus diisi";
         } elseif (strlen($data['username']) < 4) {
@@ -48,14 +46,12 @@ class UserController {
             $errors[] = "Username sudah terdaftar";
         }
     
-        // Validasi password
         if (empty($data['password'])) {
             $errors[] = "Password harus diisi";
         } elseif (strlen($data['password']) < 6) {
             $errors[] = "Password minimal 6 karakter";
         } 
         
-        // Validasi konfirmasi password
         if (empty($data['confirm_password'])) {
             $errors[] = "Konfirmasi password harus diisi";
         } elseif ($data['password'] !== $data['confirm_password']) {
@@ -67,22 +63,17 @@ class UserController {
     public function register() {
         $this->checkLoggedIn();
 
-        // Proses registrasi
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Validasi input
             $errors = $this->validateRegistrationData($_POST);
 
             if (empty($errors)) {
-                // Siapkan data untuk disimpan
                 $userData = [
                     'username' => $_POST['username'],
                     'password' => $_POST['password'],
-                    'role' => 'user' // Default role
+                    'role' => 'user' 
                 ];
 
-                // Proses registrasi
                 if ($this->user->register($userData)) {
-                    // Redirect ke halaman login dengan pesan sukses
                     $_SESSION['success_message'] = "Registrasi berhasil. Silakan login.";
                     header('Location: index.php?page=user&action=login');
                     exit();
@@ -92,7 +83,6 @@ class UserController {
             }
         }
 
-        // Tampilkan view registrasi
         require 'views/users/register.php';
     }
 

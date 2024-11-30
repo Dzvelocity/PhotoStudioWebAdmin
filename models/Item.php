@@ -16,7 +16,6 @@ class Item {
         
         $items = [];
         while ($row = $result->fetch_assoc()) {
-            // Pecah string gambar menjadi array
             $row['images'] = $row['image'] ? explode(',', $row['image']) : [];
             $items[] = $row;
         }
@@ -25,12 +24,10 @@ class Item {
     }
     
     public function getItemById($id, $user_id = null) {
-        // Jika user_id tidak diberikan, gunakan query tanpa kondisi user_id
         if ($user_id === null) {
             $stmt = $this->conn->prepare("SELECT * FROM items WHERE id = ?");
             $stmt->bind_param("i", $id);
         } else {
-            // Jika user_id diberikan, tambahkan kondisi user_id
             $stmt = $this->conn->prepare("SELECT * FROM items WHERE id = ? AND user_id = ?");
             $stmt->bind_param("ii", $id, $user_id);
         }
@@ -67,7 +64,7 @@ class Item {
         
         $stmt->bind_param(
             "issssiid", 
-            $user_id,  // Tambahkan user_id sebagai parameter pertama
+            $user_id, 
             $data['customer_name'], 
             $data['phone_number'], 
             $data['photo_date'], 
@@ -79,7 +76,6 @@ class Item {
         
         $result = $stmt->execute();
         
-        // Tambahkan error handling
         if (!$result) {
             error_log("Error adding item: " . $stmt->error);
         }
@@ -88,11 +84,9 @@ class Item {
     }
     
     public function deleteItem($id, $user_id) {
-        // Siapkan statement untuk menghapus item dengan validasi user_id
         $stmt = $this->conn->prepare("DELETE FROM items WHERE id = ? AND user_id = ?");
         $stmt->bind_param("ii", $id, $user_id);
         
-        // Eksekusi dan kembalikan hasil
         $result = $stmt->execute();
         
         if (!$result) {
@@ -103,18 +97,15 @@ class Item {
     }
     
     public function updateItem($data) {
-        // Ambil gambar existing dari database
         $existingItem = $this->getItemById($data['id']);
         $existingImages = !empty($existingItem['image']) ? explode(',', $existingItem['image']) : [];
         
-        $newUploadedImages = $existingImages; // Salin gambar existing
+        $newUploadedImages = $existingImages; 
     
-        // Proses upload gambar baru jika ada
         for ($i = 0; $i < count($existingImages); $i++) {
             if (isset($_FILES['image_' . $i]) && $_FILES['image_' . $i]['error'] == UPLOAD_ERR_OK) {
                 $uploadDir = 'uploads/';
                 
-                // Hapus file lama jika ada
                 if (!empty($existingImages[$i]) && file_exists($uploadDir . $existingImages[$i])) {
                     unlink($uploadDir . $existingImages[$i]);
                 }
@@ -123,12 +114,11 @@ class Item {
                 $uploadPath = $uploadDir . $fileName;
                 
                 if (move_uploaded_file($_FILES['image_' . $i]['tmp_name'], $uploadPath)) {
-                    $newUploadedImages[$i] = $fileName; // Simpan nama file baru
+                    $newUploadedImages[$i] = $fileName; 
                 }
             }
         }
     
-        // Gabungkan gambar
         $imageString = implode(',', $newUploadedImages);
     
         $sql = "UPDATE items SET 
@@ -156,7 +146,6 @@ class Item {
     
         $result = $stmt->execute();
     
-        // Log untuk debugging
         if (!$result) {
             error_log("Update item error: " . $stmt->error);
         }

@@ -31,8 +31,8 @@
             }
             img {
                 object-fit: cover;
-                margin: 0 auto; /* Tambahkan ini untuk membuat gambar rata tengah */
-                display: block; /* Tambahkan ini untuk membuat gambar rata tengah */
+                margin: 0 auto; 
+                display: block; 
             }
             .btn-center {
                 display: inline-block;

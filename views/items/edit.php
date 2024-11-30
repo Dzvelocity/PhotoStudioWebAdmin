@@ -11,11 +11,11 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; /* Tetap sama */
+            background-color: #f0f0f0; 
         }
         .edit-container {
-            background-color: white; /* Ubah dari #e3e3e3 menjadi putih */
-            padding: 40px; /* Sesuaikan dengan halaman add */
+            background-color: white; 
+            padding: 40px; 
             border-radius: 10px;
             width: 70%;
             max-width: 800px;

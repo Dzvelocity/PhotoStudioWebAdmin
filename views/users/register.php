@@ -21,7 +21,6 @@
                     <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required><br><br>
                     
                     <?php 
-                    // Tampilkan error jika ada
                     if (!empty($errors)): ?>
                         <div style="color: red; margin-bottom: 10px;">
                             <?php foreach ($errors as $error): ?>
