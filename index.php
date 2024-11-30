@@ -1,28 +1,69 @@
 <?php
 session_start();
-if (isset($_SESSION['username'])) {
-    header('Location: home.php');
-    exit();
+
+require_once 'config/db.php';
+
+function autoloadController($className) {
+    $filename = 'controllers/' . $className . '.php';
+    if (file_exists($filename)) {
+        require_once $filename;
+    }
+}
+spl_autoload_register('autoloadController');
+
+$page = $_GET['page'] ?? 'get_started';
+$action = $_GET['action'] ?? 'index';
+
+$publicPages = ['get_started', 'user'];
+$publicActions = ['login', 'register'];
+
+if (!in_array($page, $publicPages) || 
+    ($page === 'user' && !in_array($action, $publicActions))) {
+    if (!isset($_SESSION['username'])) {
+        header('Location: index.php?page=user&action=login');
+        exit();
+    }
+}
+
+try {
+    switch ($page) {
+        case 'get_started':
+            $controller = new GetStartedController();
+            $controller->index();
+            break;
+        case 'home':
+            $controller = new HomeController();
+            $controller->index();
+            break;
+        case 'user':
+            $controller = new UserController();
+            if ($action == 'login') {
+                $controller->login();
+            } elseif ($action == 'logout') {
+                $controller->logout();
+            } elseif ($action == 'register') {
+                $controller->register();
+            }
+            break;
+        case 'item':
+            $controller = new ItemController();
+            if ($action === 'add') {
+                $controller->add();
+            } elseif ($action === 'edit') {
+                $controller->edit();
+            } elseif ($action === 'delete') {
+                $controller->delete();
+            } elseif ($action === 'detail') {
+                $controller->detail();
+            } elseif ($action === 'view_image') {
+                $controller->view_image();
+            }
+            break;
+        default:
+            header('Location: index.php?page=get_started');
+            exit();
+    }
+} catch (Exception $e) {
+    echo "Terjadi kesalahan: " . $e->getMessage();
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started</title>
-</head>
-<body style="margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: LightGray;">
-
-    <div style="text-align: center;">
-        <h1>Welcome to FL Photo Studio Admin</h1>
-        <p>This platform allows administrators to manage customer data, photo sessions,</p>
-        <p> and additional services of FL Photo Studio.</p>
-        <div>
-            <a href="login.php">Login</a><br><br>
-            <a href="register.php">Register</a>
-        </div>
-    </div>
-
-</body>
-</html>
